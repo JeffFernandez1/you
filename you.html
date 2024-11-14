@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para la Reina más Hermosa</title>
+    <style>
+        body {
+            background-color: #f5e1da;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #d4af37;
+            font-size: 3rem;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out 1s;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            color: #555;
+            opacity: 0;
+            transition: opacity 2s ease-in-out 2s;
+        }
+
+        .container {
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            display: none;
+        }
+
+        .container.show {
+            opacity: 1;
+            display: block;
+        }
+
+        /* Barra de carga */
+        .loading-bar-container {
+            width: 80%;
+            height: 30px;
+            background-color: #e0b0b0;
+            margin: 20px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            background-color: #8e44ad; /* Color morado */
+            width: 0%;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 3s ease-in-out;
+        }
+
+        /* Texto "FOR: PAULA" encima de la barra */
+        .for-paula {
+            position: absolute;
+            top: -35px; /* Ajusta la distancia del texto respecto a la barra */
+            left: 50%;
+            transform: translateX(-50%); /* Centra el texto horizontalmente */
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000; /* Texto negro para que se vea bien */
+            white-space: nowrap;
+            animation: moveText 3s linear forwards; /* Hacer que el texto se mueva */
+        }
+
+        @keyframes moveText {
+            0% {
+                transform: translateX(100%); /* Comienza a la derecha */
+            }
+            100% {
+                transform: translateX(-100%); /* Termina a la izquierda */
+            }
+        }
+
+        /* Corona */
+        .crown {
+            width: 150px;
+            height: 150px;
+            background-image: url('https://img.icons8.com/emoji/452/crown-emoji.png');
+            background-size: cover;
+            margin: 20px auto;
+            opacity: 0;
+            transform: translateY(-100px);
+            transition: opacity 2s ease, transform 2s ease;
+            animation: moveCrown 2s ease-in-out infinite;
+        }
+
+        @keyframes moveCrown {
+            0% {
+                transform: translateY(-100px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+
+        /* Efecto de desaparición total de la barra */
+        .loading-bar-container.hidden {
+            display: none; /* Elimina completamente el contenedor de la barra */
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-bar-container">
+        <!-- Texto "FOR: PAULA" encima de la barra -->
+        <div class="for-paula">FOR: PAULA</div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <div class="container">
+        <div class="crown"></div>
+        <h1>Para la Reina más Hermosa de Todas</h1>
+        <p class="message">No es algo que puedas tocar, pero espero que toque tu corazón.</p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const container = document.querySelector('.container');
+            const loadingBarContainer = document.querySelector('.loading-bar-container');
+            const loadingBar = document.querySelector('.loading-bar');
+            const crown = document.querySelector('.crown');
+            const h1 = document.querySelector('h1');
+            const message = document.querySelector('.message');
+
+            // Rellenar la barra de carga
+            setTimeout(() => {
+                loadingBar.style.width = '100%'; // Rellenar la barra de carga
+            }, 100);
+
+            // Desaparecer completamente la barra de carga después de que se llena
+            setTimeout(() => {
+                loadingBarContainer.classList.add('hidden'); // Elimina el contenedor de la barra completamente
+            }, 3300); // 3.3 segundos para que se complete la barra y luego desaparezca
+
+            // Mostrar la corona y el mensaje después de que la barra de carga se llene
+            setTimeout(() => {
+                container.classList.add('show'); // Mostrar la corona y el mensaje
+                crown.style.opacity = '1';
+                crown.style.transform = 'translateY(0)';
+                h1.style.opacity = '1';
+                message.style.opacity = '1';
+            }, 3500); // Después de 3.5 segundos, mostrar la corona y el mensaje
+        };
+    </script>
+</body>
+</html>
